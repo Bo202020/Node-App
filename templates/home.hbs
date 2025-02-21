@@ -1,0 +1,21 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesL.css" />
+    {{{sans}}}
+  </head>
+  <body>
+    <h2>{{page}}</h2>
+    <h1>{{title}}</h1>
+    <img src="/Screenshot 2025-01-21 184013.png" alt="logo" />
+    <a href="/about">about</a>
+    <a href="/help">help</a>
+    <a href="/logout">Sign Out</a>
+    <script>
+      window.history.pushState(null, "", window.location.href);
+      window.onpopstate = function () { window.history.pushState(null, "",
+      window.location.href); };
+    </script>
+  </body>
+</html>

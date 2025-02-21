@@ -1,0 +1,36 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles.css" />
+    {{{sans}}}
+  </head>
+  <body>
+    <h2>{{page}}</h2>
+    <h1>{{title}}</h1>
+    <img src="/Screenshot 2025-01-21 184013.png" alt="logo" />
+    <a href="/about">about</a>
+    <a href="/help">help</a>
+    <a href="/signUp">Sign Up</a>
+    <form action="/login" method="POST" novalidate="true" id="containerL">
+      <input
+        type="email"
+        placeholder="name@example.com"
+        id="emailL"
+        name="email"
+        required="true"
+      />
+      {{{errMsgE}}}
+      <input
+        type="password"
+        placeholder="password"
+        id="passL"
+        name="password"
+        required="true"
+      />
+      {{{errMsgP}}}
+      <button type="submit" id="sbmL">Submit</button>
+    </form>
+    <script src="/loginRouting.js"></script>
+  </body>
+</html>

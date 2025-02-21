@@ -1,0 +1,43 @@
+html,
+body {
+  background: #2d2d2d;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  scrollbar-width: none;
+}
+.smooch-sans {
+  font-family: "Smooch Sans", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+a {
+  padding: 7.5px 25px;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: white;
+  border: 2px solid white;
+  letter-spacing: 4px;
+  font-family: "Smooch Sans", serif;
+  font-weight: 600;
+  font-size: 20px;
+  margin: 20px;
+}
+h1,
+h2 {
+  letter-spacing: 4px;
+  font-family: "Smooch Sans", serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin: 20px;
+}
