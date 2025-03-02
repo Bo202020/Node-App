@@ -13,11 +13,14 @@ import { fileURLToPath } from "url";
 import { dirname } from "path";
 import dotenv from "dotenv";
 import multer from "multer";
+import { Server } from "socket.io";
 const tokenBlacklist = new Set();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 dotenv.config();
 const app = express();
+const server = app.listen(PORT, () => console.log("server up"));
+const io = new Server(server);
 app.use((req, res, next) => {
   res.setHeader(
     "Cache-Control",
@@ -239,5 +242,4 @@ app.get("*", (req, res) => {
   res.render("404", { err: "Could not find page", sans: smoochSans });
 });
 
-app.listen(PORT, () => console.log("server up"));
 export default tokenBlacklist;
