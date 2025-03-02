@@ -238,6 +238,18 @@ app.post("/login", upload.none(), async (req, res) => {
     });
   }
 });
+io.on("connection", (socket) => {
+  console.log("a user has connected");
+
+  socket.on("chat message", (msg) => {
+    console.log("message: " + msg);
+
+    io.emit("chat message", msg);
+  });
+  socket.on("disconnect", () => {
+    console.log("A user has diconnected");
+  });
+});
 app.get("*", (req, res) => {
   res.render("404", { err: "Could not find page", sans: smoochSans });
 });
