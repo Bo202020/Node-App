@@ -13,14 +13,11 @@ import { fileURLToPath } from "url";
 import { dirname } from "path";
 import dotenv from "dotenv";
 import multer from "multer";
-import { Server } from "socket.io";
 const tokenBlacklist = new Set();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 dotenv.config();
 const app = express();
-const server = app.listen(PORT, () => console.log("server up"));
-const io = new Server(server);
 app.use((req, res, next) => {
   res.setHeader(
     "Cache-Control",
@@ -142,6 +139,38 @@ app.get("/logout", (req, res) => {
   res.setHeader("Cache-Control", "no-store");
   res.redirect("/login");
 });
+app.get("/menu", (req, res) => {
+  if (!req.cookies.auth_token) {
+    return res.redirect("/login");
+  }
+  res.setHeader(
+    "Cache-Control",
+    "no-store, no-cache, must-revalidate, proxy-revalidate"
+  );
+  res.setHeader("Pragma", "no-cache");
+  res.setHeader("Expires", "0");
+  res.render("menu", {
+    sans: smoochSans,
+    page: "GSH",
+    title: "Play TIC TAC TOE",
+  });
+});
+app.get("/tictactoe", (req, res) => {
+  if (!req.cookies.auth_token) {
+    return res.redirect("/login");
+  }
+  res.setHeader(
+    "Cache-Control",
+    "no-store, no-cache, must-revalidate, proxy-revalidate"
+  );
+  res.setHeader("Pragma", "no-cache");
+  res.setHeader("Expires", "0");
+  res.render("menu", {
+    sans: smoochSans,
+    page: "GSH",
+    title: "TIC TAC TOE",
+  });
+});
 app.post("/question", (req, res) => {
   const input = req.body.question;
   fetch(`http://127.0.0.1:3001/question?query=${input}`)
@@ -238,20 +267,9 @@ app.post("/login", upload.none(), async (req, res) => {
     });
   }
 });
-io.on("connection", (socket) => {
-  console.log("a user has connected");
-
-  socket.on("chat message", (msg) => {
-    console.log("message: " + msg);
-
-    io.emit("chat message", msg);
-  });
-  socket.on("disconnect", () => {
-    console.log("A user has diconnected");
-  });
-});
 app.get("*", (req, res) => {
   res.render("404", { err: "Could not find page", sans: smoochSans });
 });
 
+app.listen(PORT, () => console.log("server up"));
 export default tokenBlacklist;
